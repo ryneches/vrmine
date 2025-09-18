@@ -1,0 +1,39 @@
+<project type="bio">
+<property name="target.model" value="genomic"/>
+<property name="common.os.prefix" value="common"/>
+<sources>
+  <source name="imgvr" type="delimited">
+    <property name="delimited.dataSourceName" value="Source1"/>
+    <property name="delimited.dataSetTitle" value="imgvr"/>
+    <property name="delimited.hasHeader" value="false"/>
+    <property name="delimited.separator" value="tab"/>
+    <property name="src.data.dir" location="data/imgvr"/>
+    <property name="delimited.includes" value="imgvr_uvigs_reformed.tsv"/>
+    <property name="delimited.columns" value ="uvig.id,
+    uvig.jgi_sample_id,
+    uvig.scaffold_id,
+    uvig.ecosystem_classification,
+    uvig.votu,
+    uvig.length,
+    uvig.start_coordinate,
+    uvig.end_coordinate,
+    uvig.is_whole_scaffold,
+    uvig.total_genes,
+    uvig.cds,
+    uvig.tRNA,
+    uvig.genomad_marker,
+    uvig.topology,
+    uvig.genomad_score,
+    uvig.confidence,
+    uvig.estimated_completeness,
+    uvig.estimated_contamination,
+    uvig.miuvig_quality,
+    uvig.taxonomic_classification,
+    uvig.taxonomic_classification_method,
+    uvig.host_taxonomy_prediction,
+    uvig.host_prediction_method,
+    uvig.sequence_origin" />
+  </source>
+</sources>
+</project>
+
