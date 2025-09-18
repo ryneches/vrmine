@@ -1,0 +1,31 @@
+<?xml version="1.0"?>
+<!-- imgvr data model to be used to load imgvr data -->
+
+<classes>
+    <class name="uvig" is-interface="true">
+        <attribute name="id" type="java.lang.String"/>
+        <attribute name="jgi_sample_id" type="java.lang.String"/>
+        <attribute name="scaffold_id" type="java.lang.String"/>
+        <attribute name="is_whole_scaffold" type="java.lang.Boolean"/>
+        <attribute name="start_coordinate" type="java.lang.Int"/>
+        <attribute name="end_coordinate" type="java.lang.Int"/>
+        <attribute name="ecosystem_classification" type="java.lang.String"/>
+        <attribute name="votu" type="java.lang.String"/>
+        <attribute name="length" type="java.lang.Int"/>
+        <attribute name="topology" type="java.lang.String"/>
+        <attribute name="genomad_score" type="java.lang.Float"/>
+        <attribute name="confidence" type="java.lang.String"/>
+        <attribute name="estimated_completeness" type="java.lang.Float"/>
+        <attribute name="estimated_contamination" type="java.lang.Float"/>
+        <attribute name="miuvig_quality" type="java.lang.String"/>
+        <attribute name="total_genes" type="java.lang.Int"/>
+        <attribute name="cds" type="java.lang.Int"/>
+        <attribute name="tRNA" type="java.lang.Int"/>
+        <attribute name="genomad_marker" type="java.lang.Int"/>
+        <attribute name="taxonomic_classification" type="java.lang.String"/>
+        <attribute name="taxonomic_classification_method" type="java.lang.String"/>
+        <attribute name="host_taxonomy_prediction" type="java.lang.String"/>
+        <attribute name="host_prediction_method" type="java.lang.String"/>
+        <attribute name="sequence_origin" type="java.lang.String"/>
+    </class>
+</classes>
