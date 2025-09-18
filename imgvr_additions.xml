@@ -2,7 +2,7 @@
 <!-- imgvr data model to be used to load imgvr data -->
 
 <classes>
-    <class name="uvig" is-interface="true">
+    <class name="uvig" extends="BioEntity" is-interface="true">
         <attribute name="id" type="java.lang.String"/>
         <attribute name="jgi_sample_id" type="java.lang.String"/>
         <attribute name="scaffold_id" type="java.lang.String"/>
