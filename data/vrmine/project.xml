@@ -7,7 +7,7 @@
     <property name="delimited.dataSetTitle" value="imgvr"/>
     <property name="delimited.hasHeader" value="false"/>
     <property name="delimited.separator" value="tab"/>
-    <property name="src.data.dir" location="data/imgvr"/>
+    <property name="src.data.dir" location="imgvr"/>
     <property name="delimited.includes" value="imgvr_uvigs_reformed.tsv"/>
     <property name="delimited.columns" value ="uvig.imgvr_id,
     uvig.jgi_sample_id,

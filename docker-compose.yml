@@ -1,7 +1,7 @@
 #version: "3"
 services:
   intermine_builder:
-    container_name: vrmine_builder
+    container_name: vrmine-builder
     networks:
       - frontend
       - backend
@@ -16,7 +16,7 @@ services:
       - ./data/properties.intermine:/home/intermine/.intermine
 
   postgres:
-    container_name: vrmine_postgres
+    container_name: vrmine-postgres
     networks:
       - backend
     build:
@@ -31,7 +31,7 @@ services:
       - MINE_NAME=vrmine
 
   solr:
-    container_name: vrmine_solr
+    container_name: vrmine-solr
     networks:
       - backend
     build:
@@ -46,7 +46,7 @@ services:
       - MINE_NAME=vrmine
 
   tomcat:
-    container_name: vrmine_tomcat
+    container_name: vrmine-tomcat
     networks:
       - frontend
       - backend
@@ -68,7 +68,7 @@ services:
 #      - ./data/war-contents:/var/lib/jetty/webapps
 
   bluegenes:
-    container_name: vrmine_bluegenes
+    container_name: vrmine-bluegenes
     networks:
       - frontend
       - backend
@@ -85,7 +85,7 @@ services:
     platform: linux/amd64
 
   nginx:
-    container_name: vrmine_nginx
+    container_name: vrmine-nginx
     networks:
       - frontend
     build:
