@@ -1,0 +1,139 @@
+#version: "3"
+services:
+  intermine_builder:
+    container_name: vrmine_builder
+    networks:
+      - frontend
+      - backend
+    build:
+      context: ./intermine_builder
+      dockerfile: ./intermine_builder.Dockerfile
+    user: ${UID:-1000}:${GID:-1000}
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - ./data/vrmine:/home/intermine/vrmine
+      - ./data/maven.m2:/home/intermine/.m2
+      - ./data/properties.intermine:/home/intermine/.intermine
+
+  postgres:
+    container_name: vrmine_postgres
+    networks:
+      - backend
+    build:
+      context: ./postgres
+      dockerfile: ./postgres.Dockerfile
+    restart: unless-stopped
+    #user: 29023:1010
+    volumes:
+      - /etc/passwd:/etc/passwd:ro
+      - ./data/postgres:/var/lib/postgresql/data
+    environment:
+      - MINE_NAME=vrmine
+
+  solr:
+    container_name: vrmine_solr
+    networks:
+      - backend
+    build:
+      context: ./solr
+      dockerfile: ./solr.Dockerfile
+    restart: unless-stopped
+    user: ${UID:-1000}:${GID:-1000}
+    volumes:
+      - ./data/solr:/var/solr
+    environment:
+      - MEM_OPTS="-Xmx8g -Xms1g"
+      - MINE_NAME=vrmine
+
+  tomcat:
+    container_name: vrmine_tomcat
+    networks:
+      - frontend
+      - backend
+    # image: bitnami/tomcat:8.5
+    build:
+      context: ./tomcat
+      dockerfile: ./tomcat.Dockerfile
+    restart: unless-stopped
+    volumes:
+      - tomcat:/usr/local/tomcat/webapps:Z
+
+
+#  jetty:
+#    container_name: vrmine_jetty
+#    image: jetty
+#    restart: unless-stopped
+#    # user: ${UID:-1000}:${GID:-1000}
+#    volumes:
+#      - ./data/war-contents:/var/lib/jetty/webapps
+
+  bluegenes:
+    container_name: vrmine_bluegenes
+    networks:
+      - frontend
+      - backend
+    image: intermine/bluegenes:1.4.5-dx
+    restart: unless-stopped
+    volumes:
+      - ./data/tools:/tools
+    environment:
+#      - BLUEGENES_DEFAULT_SERVICE_ROOT="https://www.vrmine.org/vrmine"
+      - BLUEGENES_DEFAULT_SERVICE_ROOT="http://localhost:12838/vrmine"
+      - BLUEGENES_BACKEND_SERVICE_ROOT="http://tomcat:8080/vrmine"
+      - BLUEGENES_DEFAULT_MINE_NAME=Flymine
+      - BLUEGENES_DEFAULT_NAMESPACE=vrmine
+    platform: linux/amd64
+
+  nginx:
+    container_name: vrmine_nginx
+    networks:
+      - frontend
+    build:
+      context: ./nginx
+      dockerfile: ./nginx.Dockerfile
+    restart: unless-stopped
+    ports:
+      - 12838:80
+
+#  ontop:
+#    container_name: vrmine_ontop
+#    networks:
+#      - backend
+##    image: ontop/ontop
+#    image: ontop/ontop-endpoint:latest
+#    restart: unless-stopped
+#    ports:
+#      - "12818:8080"
+#    volumes:
+#      - ./ontop:/opt/ontop/input
+#      - ./ontop/jdbc:/opt/ontop/jdbc
+#    environment:
+##      - ONTOP_MAPPING_FILE=/opt/ontop/input/mapping.obda
+#      - ONTOP_PROPERTIES_FILE=/opt/ontop/input/db.properties
+#      - ONTOP_MAPPING_FILE=/opt/ontop/input/ontology.ttl
+##      - ONTOP_ONTOLOGY_FILE=/opt/ontop/input/ontology.ttl
+#      - ONTOP_DB_URL=jdbc:postgresql://postgres:5432/vrmine
+#      - ONTOP_DB_USER=postgres
+#      - ONTOP_DB_PASSWORD=postgres
+#      - ONTOP_DB_DRIVER=org.postgresql.Driver
+#    platform: linux/amd64
+
+
+#  tunnel:
+#    container_name: vrmine_tunnel
+#    networks:
+#      - frontend
+#    image: cloudflare/cloudflared
+#    restart: unless-stopped
+#    command: tunnel run
+#    environment:
+#        - TUNNEL_TOKEN=eyJhIjoiNzc0ZTkyYjdhZDc0ZTIzZTQ3OWE5NzExZDg1NmQxZGEiLCJ0IjoiNWU5ZGZjODYtYjZiZC00NmM1LWIyNDItZGRhN2YzNjQxNWQ1IiwicyI6IllqRmlNalJpTlRrdE9ETTRNaTAwWVRFNUxUZ3dZelF0TWpRM1ltTXlNakEwTVRRMyJ9
+
+volumes:
+  tomcat:
+
+networks:
+  frontend:
+    driver: bridge
+  backend:
+    driver: bridge
