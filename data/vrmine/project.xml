@@ -3,13 +3,13 @@
 <property name="common.os.prefix" value="common"/>
 <sources>
   <source name="imgvr" type="delimited">
-    <property name="delimited.dataSourceName" value="Source1"/>
+    <property name="delimited.dataSourceName" value="imgvr"/>
     <property name="delimited.dataSetTitle" value="imgvr"/>
     <property name="delimited.hasHeader" value="false"/>
     <property name="delimited.separator" value="tab"/>
-    <property name="src.data.dir" location="data/vrmine"/>
+    <property name="src.data.dir" location="data/imgvr"/>
     <property name="delimited.includes" value="imgvr_uvigs_reformed.tsv"/>
-    <property name="delimited.columns" value ="uvig.id,
+    <property name="delimited.columns" value ="uvig.imgvr_id,
     uvig.jgi_sample_id,
     uvig.scaffold_id,
     uvig.ecosystem_classification,
@@ -35,5 +35,14 @@
     uvig.sequence_origin" />
   </source>
 </sources>
+  <post-processing>
+    <post-process name="create-references"/>
+    <post-process name="transfer-sequences" dump="false"/>
+    <!-- this runs the postprocessing steps in all sources -->
+    <post-process name="do-sources"/>
+    <post-process name="summarise-objectstore"/>
+    <post-process name="create-autocomplete-index"/>
+    <post-process name="create-search-index"/>
+  </post-processing>
 </project>
 
