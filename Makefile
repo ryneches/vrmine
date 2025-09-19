@@ -25,5 +25,5 @@ down:
 	docker compose down
 
 volumes:
-	mkdir -p data/vrmine data/maven.m2 data/postgres data/properties.intermine data/solr data/tools
+	mkdir -p data/maven.m2 data/postgres data/properties.intermine data/solr data/tools
 

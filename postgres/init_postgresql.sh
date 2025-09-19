@@ -1,7 +1,4 @@
 #!/bin/bash
-echo 'huzza!'
-
-
 set -e
 
 # Note: This script is only run if the data directory is empty

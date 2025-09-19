@@ -23,7 +23,7 @@ services:
       context: ./postgres
       dockerfile: ./postgres.Dockerfile
     restart: unless-stopped
-    #user: 29023:1010
+    user: 29023:1010
     volumes:
       - /etc/passwd:/etc/passwd:ro
       - ./data/postgres:/var/lib/postgresql/data

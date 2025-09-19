@@ -5,13 +5,12 @@ host="${PGHOST:-postgres}"
 port="${PGPORT:-5432}"
 user="${PSQL_USER:-postgres}"
 db=${MINE_NAME}
-#db=vrmine
 export PGPASSWORD="${PSQL_PWD:-postgres}"
 
 args=(
 	# force postgres to not use the local unix socket (test "external" connectibility)
 	--host "$host"
-        --port "$port"
+    --port "$port"
 	--username "$user"
 	--dbname "$db"
 	--quiet --no-align --tuples-only
